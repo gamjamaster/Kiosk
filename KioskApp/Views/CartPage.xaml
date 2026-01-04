@@ -14,12 +14,7 @@
         <!-- Header -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,30">
             <Button Content="&#x2190; Back" 
-                   FontSize="18" 
-                   Padding="20,10"
-                   Background="White"
-                   BorderThickness="1"
-                   BorderBrush="#FFDDDDDD"
-                   Cursor="Hand"
+                 Style="{StaticResource SecondaryButtonStyle}"
                    Click="BackButton_Click"/>
             <TextBlock Text="Shopping Cart" 
                       FontSize="36" 
@@ -34,7 +29,7 @@
                 <TextBlock x:Name="EmptyCartMessage" 
                           Text="Cart is empty." 
                           FontSize="24" 
-                          Foreground="#FF999999"
+                          Foreground="{StaticResource MutedTextColor}"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
                           TextAlignment="Center"
@@ -64,7 +59,7 @@
                                                  FontSize="22" 
                                                  FontWeight="Bold"/>
                                         <TextBlock FontSize="18" 
-                                                 Foreground="#FF666666"
+                                                 Foreground="{StaticResource MutedTextColor}"
                                                  Margin="0,5,0,0">
                                             <Run Text="$"/>
                                             <Run Text="{Binding MenuItem.Price, StringFormat=N0}"/>
@@ -105,7 +100,7 @@
                                              VerticalAlignment="Center"
                                              Margin="30,0">
                                         <Run Text="$"/>
-                                        <Run Text="{Binding TotalPrice, StringFormat=N0}"/>
+                                        <Run Text="{Binding TotalPrice, Mode=OneWay, StringFormat=N0}"/>
                                     </TextBlock>
                                     
                                     <Button Grid.Column="3" 
@@ -113,8 +108,8 @@
                                            FontSize="24"
                                            Width="50" 
                                            Height="50"
-                                           Background="#FFFF5252"
-                                           Foreground="White"
+                                         Background="#FF333333"
+                                         Foreground="White"
                                            BorderThickness="0"
                                            Cursor="Hand"
                                            Click="RemoveItem_Click"
@@ -128,14 +123,7 @@
         </ScrollViewer>
         
         <!-- Total and Actions -->
-        <Border Grid.Row="2" 
-               Background="White" 
-               Padding="30"
-               CornerRadius="8"
-               Margin="0,20,0,0">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="2" Opacity="0.2"/>
-            </Border.Effect>
+        <Border Grid.Row="2" Style="{StaticResource CardBorderStyle}" Margin="0,20,0,0" Padding="30">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -146,7 +134,7 @@
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
                     <TextBlock Text="Total Amount" 
                              FontSize="20" 
-                             Foreground="#FF666666"/>
+                             Foreground="{StaticResource MutedTextColor}"/>
                     <TextBlock x:Name="TotalAmountText" 
                              FontSize="36" 
                              FontWeight="Bold"
@@ -155,12 +143,8 @@
                 
                 <Button Grid.Column="1" 
                        Content="Clear Cart" 
-                       Padding="30,15"
-                       FontSize="18"
                        Margin="0,0,20,0"
-                       Background="#FFEEEEEE"
-                       BorderThickness="0"
-                       Cursor="Hand"
+                      Style="{StaticResource SecondaryButtonStyle}"
                        Click="ClearCart_Click"/>
                 
                 <Button Grid.Column="2" 

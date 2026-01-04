@@ -12,12 +12,7 @@
         <!-- Header -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,30">
             <Button Content="&#x2190; Back" 
-                   FontSize="18" 
-                   Padding="20,10"
-                   Background="White"
-                   BorderThickness="1"
-                   BorderBrush="#FFDDDDDD"
-                   Cursor="Hand"
+                 Style="{StaticResource SecondaryButtonStyle}"
                    Click="BackButton_Click"/>
             <TextBlock Text="Select Payment Method" 
                       FontSize="36" 
@@ -34,14 +29,7 @@
             </Grid.RowDefinitions>
             
             <!-- Order Summary -->
-            <Border Grid.Row="0" 
-                   Background="White" 
-                   Padding="30"
-                   CornerRadius="8"
-                   Margin="0,0,0,30">
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="2" Opacity="0.2"/>
-                </Border.Effect>
+            <Border Grid.Row="0" Style="{StaticResource CardBorderStyle}" Margin="0,0,0,30" Padding="30">
                 <StackPanel>
                     <TextBlock Text="Order Summary" 
                              FontSize="24" 
@@ -71,7 +59,7 @@
                                              FontSize="18"
                                              FontWeight="Bold">
                                         <Run Text="$"/>
-                                        <Run Text="{Binding TotalPrice, StringFormat=N0}"/>
+                                        <Run Text="{Binding TotalPrice, Mode=OneWay, StringFormat=N0}"/>
                                     </TextBlock>
                                 </Grid>
                             </DataTemplate>
@@ -107,7 +95,7 @@
                     <StackPanel>
                         <TextBlock Text="&#x1F4B3;" FontSize="100" HorizontalAlignment="Center"/>
                         <TextBlock Text="Card Payment" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,30,0,0"/>
-                        <TextBlock Text="Credit/Debit Card" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="#FF666666"/>
+                        <TextBlock Text="Credit/Debit Card" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="{StaticResource MutedTextColor}"/>
                     </StackPanel>
                 </Button>
                 
@@ -118,7 +106,7 @@
                     <StackPanel>
                         <TextBlock Text="&#x1F4B5;" FontSize="100" HorizontalAlignment="Center"/>
                         <TextBlock Text="Cash Payment" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,30,0,0"/>
-                        <TextBlock Text="Cash" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="#FF666666"/>
+                        <TextBlock Text="Cash" FontSize="20" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="{StaticResource MutedTextColor}"/>
                     </StackPanel>
                 </Button>
             </UniformGrid>

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using KioskApp.Models;
 
@@ -19,8 +21,43 @@ namespace KioskApp.ViewModels
         {
             CartItems = new ObservableCollection<CartItem>();
             _allMenuItems = InitializeMenuItems();
-            
-            CartItems.CollectionChanged += (s, e) => CartUpdated?.Invoke();
+
+            CartItems.CollectionChanged += CartItems_CollectionChanged;
+        }
+
+        private void CartItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+            {
+                foreach (var oldItem in e.OldItems)
+                {
+                    if (oldItem is CartItem oldCartItem)
+                    {
+                        oldCartItem.PropertyChanged -= CartItem_PropertyChanged;
+                    }
+                }
+            }
+
+            if (e.NewItems != null)
+            {
+                foreach (var newItem in e.NewItems)
+                {
+                    if (newItem is CartItem newCartItem)
+                    {
+                        newCartItem.PropertyChanged += CartItem_PropertyChanged;
+                    }
+                }
+            }
+
+            CartUpdated?.Invoke();
+        }
+
+        private void CartItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CartItem.Quantity) || e.PropertyName == nameof(CartItem.TotalPrice))
+            {
+                CartUpdated?.Invoke();
+            }
         }
         
         private List<MenuItem> InitializeMenuItems()
@@ -82,20 +119,20 @@ namespace KioskApp.ViewModels
                 };
                 CartItems.Add(cartItem);
             }
-            
-            CartUpdated?.Invoke();
         }
         
         public void RemoveFromCart(CartItem cartItem)
         {
             CartItems.Remove(cartItem);
-            CartUpdated?.Invoke();
         }
         
         public void ClearCart()
         {
+            foreach (var cartItem in CartItems)
+            {
+                cartItem.PropertyChanged -= CartItem_PropertyChanged;
+            }
             CartItems.Clear();
-            CartUpdated?.Invoke();
         }
         
         public decimal TotalAmount => CartItems.Sum(ci => ci.TotalPrice);

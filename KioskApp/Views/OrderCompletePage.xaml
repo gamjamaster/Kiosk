@@ -19,23 +19,17 @@
                       Margin="0,0,0,10"/>
             <TextBlock Text="Thank you for your order!" 
                       FontSize="36" 
-                      Foreground="#FF666666"
+                      Foreground="{StaticResource MutedTextColor}"
                       HorizontalAlignment="Center"
                       Margin="0,0,0,50"/>
             
             <!-- Order Number -->
-            <Border Background="White" 
-                   Padding="40"
-                   CornerRadius="8"
-                   Margin="0,0,0,30">
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="3" Opacity="0.3"/>
-                </Border.Effect>
+            <Border Style="{StaticResource CardBorderStyle}" Padding="40" Margin="0,0,0,30">
                 <StackPanel>
                     <TextBlock Text="Order Number" 
                              FontSize="24" 
                              HorizontalAlignment="Center"
-                             Foreground="#FF666666"
+                             Foreground="{StaticResource MutedTextColor}"
                              Margin="0,0,0,15"/>
                     <TextBlock x:Name="OrderNumberText" 
                              FontSize="72" 
@@ -48,7 +42,7 @@
                     <TextBlock Text="Order Time" 
                              FontSize="18" 
                              HorizontalAlignment="Center"
-                             Foreground="#FF666666"
+                             Foreground="{StaticResource MutedTextColor}"
                              Margin="0,0,0,10"/>
                     <TextBlock x:Name="OrderTimeText" 
                              FontSize="20" 
@@ -57,7 +51,7 @@
                     <TextBlock Text="Payment Method" 
                              FontSize="18" 
                              HorizontalAlignment="Center"
-                             Foreground="#FF666666"
+                             Foreground="{StaticResource MutedTextColor}"
                              Margin="0,20,0,10"/>
                     <TextBlock x:Name="PaymentMethodText" 
                              FontSize="20" 
@@ -66,7 +60,7 @@
                     <TextBlock Text="Total Amount" 
                              FontSize="18" 
                              HorizontalAlignment="Center"
-                             Foreground="#FF666666"
+                             Foreground="{StaticResource MutedTextColor}"
                              Margin="0,20,0,10"/>
                     <TextBlock x:Name="TotalAmountText" 
                              FontSize="28" 
@@ -79,7 +73,7 @@
             <!-- Instructions -->
             <TextBlock TextAlignment="Center" 
                       FontSize="20" 
-                      Foreground="#FF666666"
+                      Foreground="{StaticResource MutedTextColor}"
                       Margin="0,0,0,40"
                       LineHeight="35">
                 <Run Text="Your order number will be called shortly."/>

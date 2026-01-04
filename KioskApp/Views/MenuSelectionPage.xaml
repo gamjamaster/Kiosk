@@ -11,12 +11,7 @@
         
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,30">
             <Button Content="&#x2190; Back" 
-                   FontSize="18" 
-                   Padding="20,10"
-                   Background="White"
-                   BorderThickness="1"
-                   BorderBrush="#FFDDDDDD"
-                   Cursor="Hand"
+                 Style="{StaticResource SecondaryButtonStyle}"
                    Click="BackButton_Click"/>
             <TextBlock x:Name="CategoryTitleText" 
                       FontSize="36" 
@@ -40,7 +35,7 @@
                                Click="MenuItemButton_Click"
                                Tag="{Binding}">
                             <StackPanel>
-                                <Border Background="#FFF0F0F0" 
+                                <Border Background="{StaticResource SurfaceAltColor}"
                                        Width="280" 
                                        Height="200" 
                                        CornerRadius="8"
@@ -58,7 +53,7 @@
                                          Margin="0,0,0,10"/>
                                 <TextBlock Text="{Binding Description}" 
                                          FontSize="14" 
-                                         Foreground="#FF666666"
+                                         Foreground="{StaticResource MutedTextColor}"
                                          TextWrapping="Wrap"
                                          HorizontalAlignment="Center"
                                          TextAlignment="Center"

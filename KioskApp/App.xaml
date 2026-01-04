@@ -5,35 +5,95 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- Colors -->
-            <SolidColorBrush x:Key="PrimaryColor" Color="#FF2196F3"/>
-            <SolidColorBrush x:Key="AccentColor" Color="#FFFF9800"/>
-            <SolidColorBrush x:Key="BackgroundColor" Color="#FFF5F5F5"/>
+            <SolidColorBrush x:Key="PrimaryColor" Color="#FF111111"/>
+            <SolidColorBrush x:Key="AccentColor" Color="#FF666666"/>
+            <SolidColorBrush x:Key="BackgroundColor" Color="#FFFFFFFF"/>
             <SolidColorBrush x:Key="CardColor" Color="#FFFFFFFF"/>
+
+            <!-- Existing in views (centralized as resources; no new colors) -->
+            <SolidColorBrush x:Key="DividerColor" Color="#FFDDDDDD"/>
+            <SolidColorBrush x:Key="MutedTextColor" Color="#FF666666"/>
+            <SolidColorBrush x:Key="SurfaceAltColor" Color="#FFF0F0F0"/>
+
+            <!-- Effects -->
+            <DropShadowEffect x:Key="CardShadow" BlurRadius="14" ShadowDepth="2" Opacity="0.16"/>
+            <DropShadowEffect x:Key="RaisedShadow" BlurRadius="18" ShadowDepth="3" Opacity="0.20"/>
+
+            <!-- Shared button template (rounded + modern interaction) -->
+            <ControlTemplate x:Key="RoundedButtonTemplate" TargetType="Button">
+                <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="12"
+                        SnapsToDevicePixels="True"
+                        RenderTransformOrigin="0.5,0.5">
+                    <Border.RenderTransform>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                    </Border.RenderTransform>
+                    <ContentPresenter Margin="{TemplateBinding Padding}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      RecognizesAccessKey="True"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="border" Property="Opacity" Value="0.92"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter TargetName="border" Property="Opacity" Value="0.85"/>
+                        <Setter TargetName="border" Property="RenderTransform">
+                            <Setter.Value>
+                                <ScaleTransform ScaleX="0.98" ScaleY="0.98"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter TargetName="border" Property="Opacity" Value="0.55"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+            <!-- Card container style -->
+            <Style x:Key="CardBorderStyle" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource CardColor}"/>
+                <Setter Property="CornerRadius" Value="12"/>
+                <Setter Property="Padding" Value="24"/>
+                <Setter Property="Effect" Value="{StaticResource CardShadow}"/>
+            </Style>
             
             <!-- Button Styles -->
             <Style x:Key="CategoryButtonStyle" TargetType="Button">
                 <Setter Property="Background" Value="{StaticResource CardColor}"/>
-                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="BorderBrush" Value="{StaticResource DividerColor}"/>
+                <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="Margin" Value="10"/>
                 <Setter Property="Padding" Value="20"/>
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Template" Value="{StaticResource RoundedButtonTemplate}"/>
                 <Setter Property="Effect">
                     <Setter.Value>
-                        <DropShadowEffect ShadowDepth="2" Opacity="0.3"/>
+                        <StaticResource ResourceKey="CardShadow"/>
                     </Setter.Value>
                 </Setter>
             </Style>
             
             <Style x:Key="MenuItemButtonStyle" TargetType="Button">
                 <Setter Property="Background" Value="{StaticResource CardColor}"/>
-                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="BorderBrush" Value="{StaticResource DividerColor}"/>
+                <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="Margin" Value="10"/>
                 <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Template" Value="{StaticResource RoundedButtonTemplate}"/>
                 <Setter Property="Effect">
                     <Setter.Value>
-                        <DropShadowEffect ShadowDepth="2" Opacity="0.3"/>
+                        <StaticResource ResourceKey="CardShadow"/>
                     </Setter.Value>
                 </Setter>
             </Style>
@@ -46,6 +106,11 @@
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Padding" Value="30,15"/>
                 <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Template" Value="{StaticResource RoundedButtonTemplate}"/>
+                <Setter Property="Effect" Value="{StaticResource RaisedShadow}"/>
             </Style>
             
             <Style x:Key="AccentButtonStyle" TargetType="Button">
@@ -56,6 +121,28 @@
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Padding" Value="30,15"/>
                 <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Template" Value="{StaticResource RoundedButtonTemplate}"/>
+                <Setter Property="Effect" Value="{StaticResource RaisedShadow}"/>
+            </Style>
+
+            <!-- Secondary/neutral button (for Back/Home/Clear, etc.) -->
+            <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="#FFEDEDED"/>
+                <Setter Property="Foreground" Value="#FF333333"/>
+                <Setter Property="BorderBrush" Value="{StaticResource DividerColor}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Padding" Value="20,10"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Template" Value="{StaticResource RoundedButtonTemplate}"/>
+                <Setter Property="Effect" Value="{StaticResource CardShadow}"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

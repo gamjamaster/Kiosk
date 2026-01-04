@@ -16,22 +16,32 @@
         <!-- Header -->
         <Border Grid.Row="0" Background="{StaticResource PrimaryColor}">
             <Grid>
-                <TextBlock Text="Welcome - Kiosk" 
+                <TextBlock Text="YHKIOSK" 
                           FontSize="32" 
                           FontWeight="Bold" 
                           Foreground="White"
                           HorizontalAlignment="Center" 
                           VerticalAlignment="Center"/>
-                <Button Content="Home" 
-                       HorizontalAlignment="Right" 
-                       VerticalAlignment="Center"
-                       Margin="20,0"
-                       Padding="20,10"
-                       Background="White"
-                       BorderThickness="0"
-                       FontSize="16"
-                       Cursor="Hand"
-                       Click="HomeButton_Click"/>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="20,0">
+                    <TextBlock Text="남은시간"
+                               Foreground="White"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               Margin="0,0,10,0"/>
+                    <TextBlock x:Name="RemainingTimeText"
+                               Text="150초"
+                               Foreground="White"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Margin="0,0,20,0"/>
+                    <Button Content="Home" 
+                            Style="{StaticResource SecondaryButtonStyle}"
+                            Click="HomeButton_Click"/>
+                </StackPanel>
             </Grid>
         </Border>
         
@@ -42,7 +52,7 @@
                Background="Transparent"/>
         
         <!-- Bottom Bar with Cart Info -->
-        <Border Grid.Row="2" Background="White" BorderThickness="0,2,0,0" BorderBrush="#FFDDDDDD">
+        <Border Grid.Row="2" Background="White" BorderThickness="0,2,0,0" BorderBrush="{StaticResource DividerColor}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
